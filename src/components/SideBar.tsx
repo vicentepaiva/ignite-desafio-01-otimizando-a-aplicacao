@@ -1,4 +1,6 @@
+import { memo } from "react";
 import { Button } from "./Button";
+
 
 interface SideBarProps {
   genres: Array<{
@@ -10,7 +12,7 @@ interface SideBarProps {
   buttonClickCallback: (args: any) => void;
 }
 
-export function SideBar({
+function SideBarComponent({
   genres,
   selectedGenreId,
   buttonClickCallback
@@ -34,3 +36,8 @@ export function SideBar({
     </nav>
   )
 }
+
+export const SideBar = memo(SideBarComponent, (prevProps, nextProps) => {
+  return prevProps.genres.length === nextProps.selectedGenreId &&
+  prevProps.genres.length === nextProps.genres.length
+})
